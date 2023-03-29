@@ -1,0 +1,70 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "mount_file_id": "1CWC3tznrwV234TMzqjfA7215VwuognPb",
+      "authorship_tag": "ABX9TyPktAjPJTPt89q7Z6i0VqMK",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/nabeel-pdc/Removing-special-characters-/blob/main/sequence_filteration.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "8uvIgWyEiD_u"
+      },
+      "outputs": [],
+      "source": [
+        "#Install required libraries for the script. This script needs Biopyhton commands to complete the required task. Skip if already installed \n",
+        "!pip install biopython\n",
+        "\n",
+        "#mount your google drive with colab. You can skip this step inf using CMD, VS code or other local environemnts \n",
+        "from google.colab import drive\n",
+        "drive.mount('/content/drive')\n",
+        "\n",
+        "# import necessary libraries\n",
+        "import pandas as pd\n",
+        "from Bio import SeqIO\n",
+        "\n",
+        "# read the excel file containing accession numbers\n",
+        "accession_numbers = pd.read_excel('Path-to-Excel-file.xlsx', header=None)\n",
+        "\n",
+        "# convert the column of accession numbers to a list\n",
+        "accession_numbers_list = accession_numbers[0].tolist()\n",
+        "\n",
+        "# create an empty list to store sequences\n",
+        "sequences_list = []\n",
+        "\n",
+        "# read the fasta file and filter sequences corresponding to accession numbers in the list\n",
+        "with open('Path-to-INPUT-fasta-file.fasta', 'r') as f:\n",
+        "    for record in SeqIO.parse(f, 'fasta'):\n",
+        "        if record.id in accession_numbers_list:\n",
+        "            sequences_list.append(record)\n",
+        "\n",
+        "# write the filtered sequences to a new fasta file\n",
+        "with open('Path-to-OUTPUT-fasta-file.fasta', 'w') as f:\n",
+        "    SeqIO.write(sequences_list, f, 'fasta')\n"
+      ]
+    }
+  ]
+}
