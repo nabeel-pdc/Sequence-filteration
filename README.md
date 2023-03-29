@@ -1,4 +1,4 @@
-# sequence-filteration
+# Sequence-filteration
 This python script uses Biopython libraries along with Pandas to filter the required sequences from a large file. If you have a FASTA file that contains a huge bunch of sequences and you need to pick selected ones then you need this script to easily filter the required sequences. 
 Follow these steps along with this script to successfully filter specified sequences from a large sequence set. 
 Make a .xlsx file containing the accession numbers of required sequences. 
